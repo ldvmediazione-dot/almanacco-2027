@@ -183,7 +183,10 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .vert .benv .logo{height:200px}
 .vert .centro .grazie{font-size:130px}
 .vert #barra{grid-template-columns:auto 1fr auto;padding:0 20px}
+.vert #nav{gap:6px}.vert #nav button{width:54px;height:54px;font-size:24px}.vert #pos{min-width:110px;font-size:20px}.vert #pos small{display:none}
+.vert #timer{gap:10px;padding:8px 6px}.vert #calice{width:56px;height:78px}
 .vert .titolo{visibility:hidden}
+#musica.spenta{opacity:.35;text-decoration:line-through}
 .vert #indice{left:20px;width:calc(100% - 40px)}
 </style>
 </head>
@@ -199,6 +202,7 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
       <button id="pagDopo" title="Pagina successiva (freccia destra, spazio)">▶</button>
       <button id="puntoDopo" title="Punto successivo (freccia giù)">⏭</button>
       <button id="menu" title="Scaletta (S)">☰</button>
+      <button id="musica" title="Musica sì / no (M)">♪</button>
     </div>
     <div class="titolo" id="titolo"></div>
     <div id="timer" title="Clic: avvia o metti in pausa (P). R: riparti da capo">
@@ -269,7 +273,29 @@ function mostra() {
   $("pagDopo").disabled = $("puntoDopo").disabled = p === punti.length - 1 && g === punti[p].pagine.length - 1;
   history.replaceState(null, "", p < 0 ? "#" : `#${p + 1}-${g + 1}`);
   disegna();
+  suona();
 }
+
+// musica: bossa nova sul benvenuto, jazz sull'ultima pagina (saluti), silenzio durante gli interventi
+const brani = { benv: new Audio("audio/benvenuto.mp3"), saluti: new Audio("audio/saluti.mp3") };
+Object.values(brani).forEach(a => { a.loop = true; a.volume = 0; });
+let musica = true;
+function suona() {
+  const fine = p === punti.length - 1 && g === punti[p].pagine.length - 1;
+  const quale = musica && (p < 0 ? "benv" : fine ? "saluti" : null);
+  for (const [k, a] of Object.entries(brani)) dissolvi(a, k === quale);
+  $("musica").classList.toggle("spenta", !musica);
+}
+function dissolvi(a, su) {                            // 3 secondi di dissolvenza
+  clearInterval(a.t);
+  if (su && a.paused) a.play().catch(() => {});       // prima del primo tocco il browser la blocca
+  a.t = setInterval(() => {
+    a.volume = Math.min(.7, Math.max(0, a.volume + (su ? .025 : -.025)));
+    if (a.volume === (su ? .7 : 0)) { clearInterval(a.t); if (!su) a.pause(); }
+  }, 100);
+}
+addEventListener("pointerdown", () => suona(), { once: true });
+addEventListener("keydown", () => suona(), { once: true });
 
 function vai(np, ng) {
   if (np === p && ng === g) return;
@@ -314,6 +340,7 @@ $("pagPrima").onclick = () => pagina(-1);
 $("pagDopo").onclick = () => pagina(1);
 $("puntoPrima").onclick = () => punto(-1);
 $("puntoDopo").onclick = () => punto(1);
+$("musica").onclick = () => { musica = !musica; suona(); };
 $("menu").onclick = () => {
   const i = $("indice");
   i.firstElementChild.innerHTML = scaletta(p);
@@ -332,6 +359,7 @@ document.addEventListener("keydown", e => {
   else if (k === "p" || k === "P") avviaPausa();
   else if (k === "r" || k === "R") azzera();
   else if (k === "s" || k === "S") $("menu").click();
+  else if (k === "m" || k === "M") $("musica").click();
   else if (k === "f" || k === "F") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   else if (k === "Escape") $("indice").hidden = true;
   else if (k === "Home") vai(-1, 0);
