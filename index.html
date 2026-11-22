@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Almanacco 2027 · Presentazione</title>
+<link rel="stylesheet" href="font/font.css">
+<style>
+:root{--carta:#F2E8D5;--inchiostro:#442413;--oliva:#4B5D23;--chiaro:#ADC136;--vino:#7A2A2E}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#1b120c;overflow:hidden}
+body{font-family:'Hanken Grotesk',sans-serif;color:var(--inchiostro);user-select:none}
+#palco{position:absolute;left:50%;top:50%;width:1920px;height:1200px;background:var(--carta);transform-origin:0 0}
+#scena{position:absolute;inset:0 0 120px 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#scena>img{max-width:100%;max-height:100%;object-fit:contain}
+.nota{position:absolute;left:40px;bottom:16px;font:italic 500 26px 'Cormorant Garamond';color:var(--oliva);background:rgba(242,232,213,.9);padding:4px 14px}
+.pg{width:100%;height:100%;padding:110px 140px;display:flex;flex-direction:column;justify-content:center}
+.centro{text-align:center;align-items:center;display:flex;flex-direction:column}
+.k{font:600 24px 'Hanken Grotesk';letter-spacing:.18em;text-transform:uppercase;color:var(--oliva);margin-bottom:22px}
+h1{font:500 112px/1.02 'Cormorant Garamond';color:var(--inchiostro)}
+h1 em,.titolo em{font-style:italic;color:var(--vino)}
+.sub{font:italic 500 44px 'Cormorant Garamond';color:var(--oliva);margin-top:28px}
+.lead{font-size:34px;line-height:1.4;max-width:1400px;margin-top:36px}
+.logo{height:220px;margin-bottom:44px}
+.tre{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:80px}
+.tre>div{border-top:4px solid var(--chiaro);padding-top:28px}
+h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
+.tre p{font-size:31px;line-height:1.45}
+.canali{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:64px}
+.canali div{border-top:4px solid var(--chiaro);padding-top:22px}
+.canali b{display:block;font:600 38px/1.1 'Cormorant Garamond';color:var(--vino);margin-bottom:12px}
+.canali span{font-size:25px;line-height:1.4}
+.citazione{font:500 104px/1.1 'Cormorant Garamond';max-width:1500px;margin-top:10px}
+.citazione em{color:var(--vino)}
+.autore{font:600 26px 'Hanken Grotesk';letter-spacing:.2em;text-transform:uppercase;color:var(--oliva);margin-top:40px}
+.autore::before{content:"";display:inline-block;width:60px;height:3px;background:var(--chiaro);vertical-align:middle;margin-right:18px}
+.piatt{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:64px}
+.piatt>div{background:#FBF4E6;border:2px solid rgba(68,36,19,.12);border-radius:22px;padding:40px 34px;display:flex;flex-direction:column}
+.loghi{height:92px;display:flex;align-items:center}
+.loghi img{max-height:72px;max-width:100%}
+.piatt b{font:600 40px/1.1 'Cormorant Garamond';color:var(--vino);margin:22px 0 14px}
+.piatt span{font-size:27px;line-height:1.45}
+.firma{margin-top:70px;font-size:22px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:18px;color:var(--oliva)}
+.firma img{height:40px}
+.temi{columns:2;column-gap:120px;margin-top:70px;padding-left:0;list-style:none;counter-reset:t}
+.temi li{counter-increment:t;font:500 52px/1.2 'Cormorant Garamond';padding:22px 0;border-bottom:2px solid rgba(68,36,19,.18);break-inside:avoid}
+.temi li::before{content:counter(t);font:700 28px 'Hanken Grotesk';color:var(--chiaro);background:var(--oliva);display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;margin-right:26px;vertical-align:middle}
+/* apertura di ogni punto: il relatore in grande */
+.apre,.vis{position:absolute;inset:0}
+.apre>img{position:absolute;right:0;top:0;width:64%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent,#000 50%);mask-image:linear-gradient(90deg,transparent,#000 50%)}
+.apre .destra{position:absolute;right:0;top:0;width:50%;height:100%;padding:0 140px 0 80px;display:flex;flex-direction:column;justify-content:center;border-left:4px solid var(--chiaro)}
+.apre:has(.destra) .testo{max-width:960px}
+.apre .destra .citazione{font-size:84px}
+.apre .destra .sub{font-size:38px}
+.apre .testo{position:relative;height:100%;max-width:1150px;padding:0 140px;display:flex;flex-direction:column;justify-content:center}
+.nome{font:600 200px/.92 'Cormorant Garamond';color:var(--inchiostro)}
+.ruolo{font:italic 500 64px 'Cormorant Garamond';color:var(--vino);margin-top:26px}
+.tema{font:500 40px/1.25 'Cormorant Garamond';color:var(--oliva);border-top:4px solid var(--chiaro);padding-top:24px;margin-top:56px;max-width:820px}
+/* pagina illustrata: poche parole a sinistra, disegno a destra */
+.vis{display:grid;grid-template-columns:45% 55%}
+.vis .testo{padding:0 70px 0 130px;display:flex;flex-direction:column;justify-content:center}
+.vis h1{font-size:100px}
+.vis .foto img{width:100%;height:100%;object-fit:cover;display:block}
+.vis.sx .foto img{object-position:left center}
+.vis.scuro .foto{background:#1b120c;display:grid;place-items:center;overflow:hidden}
+.vis.scuro .foto img{width:auto;height:auto;max-width:92%;max-height:92%;object-fit:contain}
+.vis.intera{grid-template-columns:38% 62%}
+.temi.uno{columns:1;max-width:900px}
+.vis.intera .foto{display:grid;place-items:center;padding:70px 70px 70px 0}
+.vis.intera .foto img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;border:2px solid rgba(68,36,19,.15)}
+.largo{width:100%;max-height:620px;object-fit:contain;object-position:left;margin-top:36px}
+.fonte{font:italic 500 28px 'Cormorant Garamond';color:var(--oliva);margin-top:40px}
+.nomi{columns:3;column-gap:60px;margin-top:50px;padding:0;list-style:none}
+.nomi li{font:500 38px/1.2 'Cormorant Garamond';padding:12px 0;border-bottom:2px solid rgba(68,36,19,.15);break-inside:avoid}
+.prog{display:grid;grid-template-columns:1fr 1fr;gap:90px;margin-top:50px}
+.prog h2{font:600 54px 'Cormorant Garamond';color:var(--vino);margin:0 0 14px}
+.prog p{display:flex;gap:26px;font:500 34px/1.25 'Cormorant Garamond';padding:12px 0;border-top:2px solid rgba(68,36,19,.15);margin:0}
+.prog b{font:700 24px/1.6 'Hanken Grotesk';color:var(--oliva);min-width:80px}
+.dati{display:flex;flex-direction:column;gap:22px;margin-top:56px}
+.dati div{display:flex;align-items:baseline;gap:22px;border-top:3px solid var(--chiaro);padding-top:16px}
+.dati b{font:600 66px/1 'Cormorant Garamond';color:var(--vino);white-space:nowrap}
+.dati span{font-size:30px;line-height:1.3}
+.amb{display:flex;align-items:center;gap:26px;margin-top:44px}
+.amb img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:4px solid var(--chiaro)}
+.amb span{font:600 20px 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:var(--oliva)}
+.amb b{display:block;font:500 46px 'Cormorant Garamond';letter-spacing:0;text-transform:none;color:var(--inchiostro);margin-top:6px}
+.tappe{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 40px;margin-top:40px}
+.tappe img{width:100%;height:215px;object-fit:cover;display:block;border:2px solid rgba(68,36,19,.15)}
+.tappe b{display:block;font:600 36px/1.1 'Cormorant Garamond';color:var(--inchiostro);margin-top:12px}
+.tappe b i{font:700 22px 'Hanken Grotesk';color:var(--oliva);font-style:normal;margin-right:12px}
+.tappe span{display:block;font:500 22px 'Hanken Grotesk';color:var(--vino);margin-top:4px}
+.esper{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 34px;margin-top:44px}
+.esper>div{background:#fffaf0;border:2px solid rgba(68,36,19,.14);box-shadow:0 10px 30px rgba(68,36,19,.08)}
+.esper img{width:100%;height:220px;object-fit:cover;display:block}
+.esper b{display:block;font:600 38px/1.05 'Cormorant Garamond';color:var(--inchiostro);padding:14px 20px 0}
+.esper span{display:block;font:500 20px 'Hanken Grotesk';color:var(--vino);padding:4px 20px 16px}
+.esper .poi{background:transparent;border:3px dashed var(--oliva);box-shadow:none;display:flex;flex-direction:column;justify-content:center;padding:24px 30px}
+.esper .poi i{font:300 120px/1 'Cormorant Garamond';color:var(--oliva);font-style:normal}
+.esper .poi b{padding:6px 0 0;font-size:40px}
+.esper .poi span{padding:8px 0 0;font-size:21px;color:var(--oliva)}
+.pg>.nota{position:static;align-self:flex-start;margin-top:36px;padding:0;background:none}
+.due{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:44px}
+.due img{width:100%;border:2px solid rgba(68,36,19,.15)}
+.due figcaption{font:italic 500 38px 'Cormorant Garamond';color:var(--vino);margin-top:12px}
+.grazie{display:flex;align-items:center;gap:28px;margin-top:56px;font:italic 500 64px 'Cormorant Garamond';color:var(--vino)}
+.grazie img{height:110px}
+.centro .grazie{flex-direction:column;gap:26px;margin-top:50px;font-size:210px;line-height:.9}
+.centro .grazie img{height:150px}
+.citazione.lunga{font-size:76px;max-width:1600px}
+/* benvenuto: i video dei siti in loop, in trasparenza */
+.benv{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
+.benv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.benv .centro{position:relative}
+.benv h1{font-size:255px;line-height:1}
+.benv .logo{height:270px;margin:44px 0 0}
+.benv .firma{justify-content:center;margin-top:60px;font-size:26px}
+.benv .firma img{height:50px}
+.benv .k,.benv .firma{color:var(--inchiostro);font-weight:700}
+.piatt.corto{margin-top:44px}
+.piatt.corto>div{padding:26px 30px}
+.piatt.corto .loghi{height:70px}
+.canali.q{grid-template-columns:repeat(4,1fr);margin-top:56px}
+/* copertina */
+.cop h1{font-size:96px}
+.meta{display:flex;gap:56px;margin-top:26px;font-size:26px;color:var(--oliva)}
+.meta b{color:var(--inchiostro);font-weight:600}
+.scaletta{margin-top:50px;display:grid;grid-template-columns:1fr 1fr;column-gap:80px}
+.scaletta button{all:unset;cursor:pointer;display:grid;grid-template-columns:56px 1fr auto;align-items:baseline;gap:16px;padding:13px 0;border-bottom:2px solid rgba(68,36,19,.15)}
+.scaletta button:hover .t{color:var(--vino)}
+.scaletta .n{font:700 24px 'Hanken Grotesk';color:var(--oliva)}
+.scaletta .t{font:500 34px/1.15 'Cormorant Garamond'}
+.scaletta .t small{display:block;font:400 21px 'Hanken Grotesk';color:var(--oliva);margin-top:3px}
+.scaletta .m{font:600 22px 'Hanken Grotesk';color:var(--vino)}
+/* barra in basso */
+#barra{position:absolute;left:0;right:0;bottom:0;height:120px;background:var(--inchiostro);color:var(--carta);display:grid;grid-template-columns:560px 1fr 360px;align-items:center;padding:0 34px}
+#nav{display:flex;align-items:center;gap:10px}
+#nav button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(242,232,213,.1);font-size:28px;line-height:1}
+#nav button:hover{background:var(--oliva)}
+#nav button:disabled{opacity:.25;cursor:default;background:rgba(242,232,213,.1)}
+#pos{min-width:150px;text-align:center;font:600 24px 'Hanken Grotesk';letter-spacing:.04em}
+#pos small{display:block;font-weight:400;font-size:18px;opacity:.7}
+.titolo{text-align:center;font:500 38px/1.1 'Cormorant Garamond';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 20px}
+.titolo small{display:block;font:400 20px 'Hanken Grotesk';letter-spacing:.12em;text-transform:uppercase;color:var(--chiaro);margin-top:6px}
+#timer{justify-self:end;display:flex;align-items:center;gap:18px;cursor:pointer;padding:8px 14px;border-radius:14px}
+#timer:hover{background:rgba(242,232,213,.08)}
+#tempo{font:700 60px 'Hanken Grotesk';font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#timer small{display:block;font:600 16px 'Hanken Grotesk';letter-spacing:.14em;text-transform:uppercase;color:var(--chiaro)}
+#timer.oltre #tempo{color:#ff6b5e}
+#timer.oltre small{color:#ff6b5e}
+#timer[hidden]{display:none}
+#calice{width:74px;height:104px;overflow:visible}
+#vino{transition:transform .3s linear}
+#onda{animation:onda 3s ease-in-out infinite paused}
+#timer.va #onda{animation-play-state:running}
+@keyframes onda{50%{transform:translateX(-14px)}}
+#azzera{background:none;border:0;padding:6px;margin-left:-4px;cursor:pointer;opacity:.55;border-radius:10px}
+#azzera:hover{opacity:1;background:rgba(242,232,213,.1)}
+#azzera svg{width:32px;height:35px;display:block}
+/* indice */
+#indice{position:absolute;left:34px;bottom:132px;width:760px;max-height:900px;overflow:auto;background:var(--carta);border:3px solid var(--inchiostro);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:16px 28px}
+#indice[hidden]{display:none}
+#indice .scaletta{grid-template-columns:1fr;margin-top:0}
+#indice button.qui .t{color:var(--vino);font-weight:600}
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="scena"></div>
+  <div id="indice" hidden><div class="scaletta"></div></div>
+  <div id="barra">
+    <div id="nav">
+      <button id="puntoPrima" title="Punto precedente (freccia su)">⏮</button>
+      <button id="pagPrima" title="Pagina precedente (freccia sinistra)">◀</button>
+      <div id="pos"></div>
+      <button id="pagDopo" title="Pagina successiva (freccia destra, spazio)">▶</button>
+      <button id="puntoDopo" title="Punto successivo (freccia giù)">⏭</button>
+      <button id="menu" title="Scaletta (S)">☰</button>
+    </div>
+    <div class="titolo" id="titolo"></div>
+    <div id="timer" title="Clic: avvia o metti in pausa (P). R: riparti da capo">
+      <svg id="calice" viewBox="0 0 74 104" aria-hidden="true">
+        <defs><clipPath id="coppa"><path d="M9 6 Q7 52 37 58 Q67 52 65 6 Z"/></clipPath></defs>
+        <g clip-path="url(#coppa)">
+          <rect x="0" y="0" width="74" height="60" fill="rgba(242,232,213,.16)"/>
+          <g id="vino"><path id="onda" fill="#B8333D" d="M-20 4 q9 -4 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 V70 H-20 Z"/></g>
+        </g>
+        <path d="M9 6 Q7 52 37 58 Q67 52 65 6" fill="none" stroke="#F2E8D5" stroke-width="2.4"/>
+        <path d="M37 58 V92 M22 96 Q37 89 52 96" fill="none" stroke="#F2E8D5" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <div><div id="tempo">0:00</div><small id="stato">in pausa</small></div>
+      <button id="azzera" title="Riporta il tempo all'inizio (R)" aria-label="Azzera il tempo">
+        <svg viewBox="0 0 24 26" fill="none" stroke="#F2E8D5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 8.2V3.5Q12 1.8 14 1.2"/><path d="M12.6 4.6Q16 1.6 20.5 3.6Q17 7.2 12.6 4.6Z"/>
+          <circle cx="4.8" cy="10.5" r="2.3"/><circle cx="9.6" cy="10.5" r="2.3"/><circle cx="14.4" cy="10.5" r="2.3"/><circle cx="19.2" cy="10.5" r="2.3"/><circle cx="7.2" cy="14.7" r="2.3"/><circle cx="12" cy="14.7" r="2.3"/><circle cx="16.8" cy="14.7" r="2.3"/><circle cx="9.6" cy="18.9" r="2.3"/><circle cx="14.4" cy="18.9" r="2.3"/><circle cx="12" cy="23.1" r="2.3"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+<script src="data.js"></script>
+<script>
+const { evento, punti } = window.PITCH;
+const $ = id => document.getElementById(id);
+// ogni punto con uno sfondo si apre con il nome del relatore in grande
+punti.forEach((x, i) => (x.sfondo || x.destra) && x.pagine.unshift({ html: `<div class="apre">${x.destra ? `<div class="destra">${x.destra}</div>` : `<img src="img/${x.sfondo}" alt="">`}
+  <div class="testo"><h1 class="nome">${x.relatore}</h1>
+  ${x.ruolo ? `<p class="ruolo">${x.ruolo}</p>` : ""}<p class="tema">${x.titolo}</p></div></div>` }));
+const resto = punti.map(p => p.minuti * 60000);      // millisecondi rimasti per punto
+let p = -1, g = 0, partito = null;                    // p = -1: copertina
+
+const voce = (x, i, qui) => `<button data-p="${i}" class="${qui ? "qui" : ""}"><span class="n">${i + 1}</span>
+  <span class="t">${x.titolo}<small>${x.relatore}</small></span><span class="m">${x.minuti} min</span></button>`;
+const scaletta = qui => punti.map((x, i) => voce(x, i, i === qui)).join("");
+
+function copertina() {
+  return `<div class="benv"><video src="video/sfondo.mp4" autoplay muted loop playsinline></video>
+    <div class="centro"><p class="k">${evento.titolo}</p><h1>Benvenuti</h1>
+    <img class="logo" src="img/logo_strada.png" alt="Strada del Vino Casavecchia di Pontelatone">
+    <p class="firma">In collaborazione con <img src="img/ryft_logo_ink.png" alt="Studio Ryft"></p></div></div>`;
+}
+
+function mostra() {
+  const s = $("scena");
+  if (p < 0) {
+    s.innerHTML = copertina();
+    const v = s.querySelector("video"); v.muted = true; v.play().catch(() => {});
+    const riprova = () => v.paused && v.play().catch(() => {}); addEventListener("pointerdown", riprova, { once: true }); addEventListener("keydown", riprova, { once: true });   // l'autoplay da innerHTML non sempre parte
+    $("titolo").innerHTML = `${evento.titolo}<small>${punti.length} punti</small>`;
+    $("pos").innerHTML = "Inizio";
+    $("timer").hidden = true;
+  } else {
+    const pt = punti[p], pg = pt.pagine[g];
+    s.innerHTML = pg.img
+      ? `<img src="${pg.img}" alt="">${pg.nota ? `<p class="nota">${pg.nota}</p>` : ""}`
+      : `<div class="pg">${pg.html}</div>`;
+    $("titolo").innerHTML = `${p + 1}. ${pt.titolo}<small>${pt.relatore}${pt.ruolo ? " · " + pt.ruolo : ""}</small>`;
+    $("pos").innerHTML = `Punto ${p + 1} di ${punti.length}<small>pagina ${g + 1} di ${pt.pagine.length}</small>`;
+    $("timer").hidden = false;
+    const im = s.querySelector("img");                            // un secondo tentativo se l'immagine non arriva
+    if (pg.img) im.onerror = () => { im.onerror = null; im.src = pg.img + "?r"; };
+    const dopo = pt.pagine[g + 1] || punti[p + 1]?.pagine[0];   // precarica la prossima immagine
+    if (dopo?.img) new Image().src = dopo.img;
+  }
+  $("pagPrima").disabled = $("puntoPrima").disabled = p < 0;
+  $("pagDopo").disabled = $("puntoDopo").disabled = p === punti.length - 1 && g === punti[p].pagine.length - 1;
+  history.replaceState(null, "", p < 0 ? "#" : `#${p + 1}-${g + 1}`);
+  disegna();
+}
+
+function vai(np, ng) {
+  if (np === p && ng === g) return;
+  // indietro (anche per rivedere un punto) = pausa; avanti = il tempo continua, sul punto nuovo se si cambia punto
+  const indietro = np < p || (np === p && ng < g), andava = !!partito;
+  pausa();
+  p = np; g = ng;
+  if (andava && !indietro && p >= 0) partito = Date.now();
+  $("indice").hidden = true;
+  mostra();
+}
+const pagina = d => {
+  if (p < 0) return d > 0 && vai(0, 0);
+  const n = punti[p].pagine.length;
+  if (g + d >= 0 && g + d < n) vai(p, g + d);
+  else if (d > 0 && p < punti.length - 1) vai(p + 1, 0);
+  else if (d < 0) vai(p - 1, p > 0 ? punti[p - 1].pagine.length - 1 : 0);
+};
+const punto = d => vai(Math.max(-1, Math.min(punti.length - 1, p + d)), 0);
+
+// conto alla rovescia: ogni punto conserva il suo tempo residuo
+const rimasto = () => resto[p] - (partito ? Date.now() - partito : 0);
+function pausa() { if (partito) { resto[p] = rimasto(); partito = null; } }
+function avviaPausa() { if (p < 0) return; partito ? pausa() : (partito = Date.now()); disegna(); }
+function disegna() {
+  if (p < 0) return;
+  const ms = rimasto(), tot = punti[p].minuti * 60000, sec = Math.ceil(Math.abs(ms) / 1000);
+  const t = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
+  $("tempo").textContent = ms < 0 ? "+" + t : t;
+  $("stato").textContent = ms < 0 ? "tempo scaduto" : partito ? "in corso" : "in pausa";
+  $("timer").classList.toggle("va", !!partito && ms > 0);
+  $("timer").classList.toggle("oltre", ms < 0);
+  const livello = Math.max(0, ms / tot);              // 1 = calice pieno, 0 = vuoto
+  $("vino").style.transform = `translateY(${8 + (1 - livello) * 52}px)`;
+}
+setInterval(() => partito && disegna(), 250);
+
+$("timer").onclick = avviaPausa;
+function azzera() { if (p < 0) return; partito = null; resto[p] = punti[p].minuti * 60000; disegna(); }
+$("azzera").onclick = e => { e.stopPropagation(); azzera(); };
+$("pagPrima").onclick = () => pagina(-1);
+$("pagDopo").onclick = () => pagina(1);
+$("puntoPrima").onclick = () => punto(-1);
+$("puntoDopo").onclick = () => punto(1);
+$("menu").onclick = () => {
+  const i = $("indice");
+  i.firstElementChild.innerHTML = scaletta(p);
+  i.hidden = !i.hidden;
+};
+document.addEventListener("click", e => {
+  const b = e.target.closest("button[data-p]");
+  if (b) vai(+b.dataset.p, 0);
+});
+document.addEventListener("keydown", e => {
+  const k = e.key;
+  if (["ArrowRight", "PageDown", " ", "Enter"].includes(k)) pagina(1);
+  else if (["ArrowLeft", "PageUp", "Backspace"].includes(k)) pagina(-1);
+  else if (k === "ArrowDown") punto(1);
+  else if (k === "ArrowUp") punto(-1);
+  else if (k === "p" || k === "P") avviaPausa();
+  else if (k === "r" || k === "R") azzera();
+  else if (k === "s" || k === "S") $("menu").click();
+  else if (k === "f" || k === "F") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  else if (k === "Escape") $("indice").hidden = true;
+  else if (k === "Home") vai(-1, 0);
+  else return;
+  e.preventDefault();
+});
+
+function adatta() {
+  // il palco si allarga sul lato in eccesso: schermo pieno su 16:9, 16:10, 4:3 senza bande
+  const k = Math.min(innerWidth / 1920, innerHeight / 1200), s = $("palco").style;
+  s.width = innerWidth / k + "px";
+  s.height = innerHeight / k + "px";
+  s.transform = `scale(${k}) translate(-50%,-50%)`;
+}
+addEventListener("resize", adatta);
+adatta();
+
+const [hp, hg] = location.hash.slice(1).split("-").map(Number);
+if (hp >= 1 && hp <= punti.length) { p = hp - 1; g = Math.min(Math.max(0, (hg || 1) - 1), punti[p].pagine.length - 1); }
+mostra();
+</script>
+</body>
+</html>
