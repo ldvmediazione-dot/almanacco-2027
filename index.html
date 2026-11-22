@@ -66,21 +66,27 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .filmato h1{color:var(--carta);font-size:120px}
 .filmato h1 em{color:var(--chiaro)}
 .filmato .sub{color:var(--carta);opacity:.85;max-width:760px}
-.schermo video{display:block;height:calc(100cqh - 40px);aspect-ratio:478/850;background:#000;border:3px solid var(--chiaro);box-shadow:0 30px 80px rgba(0,0,0,.6);cursor:pointer}
-.filmato .linea{max-width:640px;height:10px;margin-top:64px;background:rgba(242,232,213,.22);border-radius:5px;cursor:pointer;overflow:hidden}
+.schermo{position:relative}
+/* inquadratura stretta sulla figura: taglia lo sfondo sopra la testa e il tavolo, non le spalle */
+.schermo video{display:block;height:calc(100cqh - 40px);aspect-ratio:478/731;object-fit:cover;object-position:50% 79%;background:#000;border:3px solid var(--chiaro);box-shadow:0 30px 80px rgba(0,0,0,.6);cursor:pointer}
+/* comandi flottanti sul video: sempre visibili in pausa, durante la riproduzione solo col mouse sopra */
+.sopra{position:absolute;left:22px;right:22px;bottom:22px;padding:16px 20px 14px;background:rgba(27,18,12,.78);border-radius:20px;transition:opacity .25s}
+.schermo.va .sopra{opacity:0}
+.schermo.va:hover .sopra{opacity:1}
+.linea{height:10px;background:rgba(242,232,213,.25);border-radius:5px;cursor:pointer;overflow:hidden}
 .linea i{display:block;height:100%;width:0;background:var(--chiaro)}
-.comandi{display:flex;align-items:center;gap:14px;margin-top:20px;max-width:640px}
-.comandi button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(242,232,213,.14);font-size:28px;line-height:1;color:var(--carta)}
+.comandi{display:flex;align-items:center;gap:14px;margin-top:14px}
+.comandi button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(242,232,213,.16);font-size:28px;line-height:1;color:var(--carta)}
 .comandi button:hover{background:var(--oliva)}
 .comandi svg{width:30px;height:30px}
 .comandi .x,.comandi .muto .onde{display:none}
 .comandi .muto .x{display:inline}
-.ore{margin-left:auto;font:600 22px 'Hanken Grotesk';font-variant-numeric:tabular-nums}
+.ore{margin-left:auto;font:600 22px 'Hanken Grotesk';font-variant-numeric:tabular-nums;color:var(--carta)}
 .vert .filmato{grid-template-columns:1fr;gap:36px;padding:50px;align-content:center;justify-items:center;text-align:center}
 .vert .filmato h1{font-size:84px}
 .vert .filmato .sub{font-size:36px;margin-top:14px}
-.vert .schermo video{height:calc(100cqh - 470px)}
-.vert .filmato{gap:24px;padding:30px}.vert .filmato .linea{margin:24px auto 0}.vert .filmato .comandi{margin:14px auto 0}
+.vert .schermo video{height:auto;width:min(calc(100cqw - 60px),calc((100cqh - 300px)*478/731))}
+.vert .filmato{gap:24px;padding:30px}
 /* pagina illustrata: poche parole a sinistra, disegno a destra */
 .vis{display:grid;grid-template-columns:45% 55%}
 .vis .testo{padding:0 70px 0 130px;display:flex;flex-direction:column;justify-content:center}
@@ -310,6 +316,7 @@ function filmato(s) {
   const b = n => s.querySelector(`[data-v="${n}"]`), mm = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
   const agg = () => {
     b("play").textContent = v.paused ? "▶" : "❚❚";
+    s.querySelector(".schermo").classList.toggle("va", !v.paused);
     b("audio").classList.toggle("muto", v.muted);
     s.querySelector(".linea i").style.width = (v.currentTime / v.duration * 100 || 0) + "%";
     s.querySelector(".ore").textContent = `${mm(v.currentTime)} / ${mm(v.duration || 0)}`;
