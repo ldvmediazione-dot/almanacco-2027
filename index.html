@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <title>Almanacco 2027 · Presentazione</title>
 <link rel="stylesheet" href="font/font.css">
 <style>
@@ -10,7 +10,7 @@
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;background:#1b120c;overflow:hidden}
 body{font-family:'Hanken Grotesk',sans-serif;color:var(--inchiostro);user-select:none}
-#palco{position:absolute;left:50%;top:50%;width:1920px;height:1200px;background:var(--carta);transform-origin:0 0}
+#palco{position:fixed;left:50%;top:50%;width:1920px;height:1200px;background:var(--carta);transform-origin:0 0}
 #scena{position:absolute;inset:0 0 120px 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #scena>img{max-width:100%;max-height:100%;object-fit:contain}
 .nota{position:absolute;left:40px;bottom:16px;font:italic 500 26px 'Cormorant Garamond';color:var(--oliva);background:rgba(242,232,213,.9);padding:4px 14px}
@@ -161,6 +161,30 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 #indice[hidden]{display:none}
 #indice .scaletta{grid-template-columns:1fr;margin-top:0}
 #indice button.qui .t{color:var(--vino);font-weight:600}
+/* telefono in verticale: palco largo 900, colonne impilate, pagina che scorre */
+.vert .pg{padding:70px 50px;justify-content:flex-start;overflow-y:auto}
+.vert .pg.centro{justify-content:center}
+.vert h1{font-size:84px}
+.vert .citazione{font-size:70px}
+.vert .citazione.lunga,.vert .apre .destra .citazione{font-size:56px}
+.vert .tre,.vert .prog,.vert .due{grid-template-columns:1fr;gap:40px}
+.vert .piatt,.vert .canali,.vert .canali.q,.vert .esper,.vert .tappe{grid-template-columns:1fr 1fr;gap:30px}
+.vert .temi,.vert .scaletta{columns:1;grid-template-columns:1fr}
+.vert .nomi{columns:2}
+.vert .apre>img{width:100%;height:52%;-webkit-mask-image:linear-gradient(0deg,transparent,#000 40%);mask-image:linear-gradient(0deg,transparent,#000 40%)}
+.vert .apre .testo{max-width:none;padding:0 50px 90px;justify-content:flex-end}
+.vert .apre .destra{width:100%;height:50%;padding:60px 50px;border-left:0;border-bottom:4px solid var(--chiaro)}
+.vert .nome{font-size:130px}
+.vert .vis{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+.vert .vis .testo{padding:80px 50px 40px}
+.vert .vis h1{font-size:76px}
+.vert .vis.intera .foto{padding:0 50px 50px}
+.vert .benv h1{font-size:150px}
+.vert .benv .logo{height:200px}
+.vert .centro .grazie{font-size:130px}
+.vert #barra{grid-template-columns:auto 1fr auto;padding:0 20px}
+.vert .titolo{visibility:hidden}
+.vert #indice{left:20px;width:calc(100% - 40px)}
 </style>
 </head>
 <body>
@@ -317,7 +341,9 @@ document.addEventListener("keydown", e => {
 
 function adatta() {
   // il palco si allarga sul lato in eccesso: schermo pieno su 16:9, 16:10, 4:3 senza bande
-  const k = Math.min(innerWidth / 1920, innerHeight / 1200), s = $("palco").style;
+  // in verticale (telefono) il palco di base e' 900x1600 con l'impaginazione .vert
+  const v = innerWidth < innerHeight, k = Math.min(innerWidth / (v ? 900 : 1920), innerHeight / (v ? 1600 : 1200)), s = $("palco").style;
+  $("palco").classList.toggle("vert", v);
   s.width = innerWidth / k + "px";
   s.height = innerHeight / k + "px";
   s.transform = `scale(${k}) translate(-50%,-50%)`;
