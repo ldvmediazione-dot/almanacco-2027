@@ -56,6 +56,30 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .nome{font:600 200px/.92 'Cormorant Garamond';color:var(--inchiostro)}
 .ruolo{font:italic 500 64px 'Cormorant Garamond';color:var(--vino);margin-top:26px}
 .tema{font:500 40px/1.25 'Cormorant Garamond';color:var(--oliva);border-top:4px solid var(--chiaro);padding-top:24px;margin-top:56px;max-width:820px}
+.contrib{font:600 22px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);margin-top:34px}
+.contrib b{display:block;font:500 58px/1.05 'Cormorant Garamond';letter-spacing:0;text-transform:none;color:var(--inchiostro);margin-top:8px}
+/* contributo filmato: schermo su fondo scuro col disegno dell'aula, video netto senza dissolvenze */
+.filmato{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:100px;padding:50px 170px;background:#1b120c;color:var(--carta);overflow:hidden;container-type:size}
+.filmato::before{content:"";position:absolute;inset:0;background:url(img/ill/aula.jpg) center/cover;opacity:.16}
+.filmato>*{position:relative}
+.filmato .k{color:var(--chiaro)}
+.filmato h1{color:var(--carta);font-size:120px}
+.filmato h1 em{color:var(--chiaro)}
+.filmato .sub{color:var(--carta);opacity:.85;max-width:760px}
+.schermo video{display:block;height:calc(100cqh - 230px);max-height:1100px;aspect-ratio:478/850;background:#000;border:3px solid var(--chiaro);box-shadow:0 30px 80px rgba(0,0,0,.6);cursor:pointer}
+.linea{height:10px;margin-top:18px;background:rgba(242,232,213,.22);border-radius:5px;cursor:pointer;overflow:hidden}
+.linea i{display:block;height:100%;width:0;background:var(--chiaro)}
+.comandi{display:flex;align-items:center;gap:12px;margin-top:16px}
+.comandi button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(242,232,213,.14);font-size:28px;line-height:1;color:var(--carta)}
+.comandi button:hover{background:var(--oliva)}
+.comandi svg{width:30px;height:30px}
+.comandi .x,.comandi .muto .onde{display:none}
+.comandi .muto .x{display:inline}
+.ore{margin-left:auto;font:600 22px 'Hanken Grotesk';font-variant-numeric:tabular-nums}
+.vert .filmato{grid-template-columns:1fr;gap:36px;padding:50px;align-content:center;justify-items:center;text-align:center}
+.vert .filmato h1{font-size:84px}
+.vert .filmato .sub{font-size:36px;margin-top:14px}
+.vert .schermo video{height:calc(100cqh - 560px)}
 /* pagina illustrata: poche parole a sinistra, disegno a destra */
 .vis{display:grid;grid-template-columns:45% 55%}
 .vis .testo{padding:0 70px 0 130px;display:flex;flex-direction:column;justify-content:center}
@@ -232,12 +256,14 @@ const $ = id => document.getElementById(id);
 // ogni punto con uno sfondo si apre con il nome del relatore in grande
 punti.forEach((x, i) => (x.sfondo || x.destra) && x.pagine.unshift({ html: `<div class="apre">${x.destra ? `<div class="destra">${x.destra}</div>` : `<img src="img/${x.sfondo}" alt="">`}
   <div class="testo"><h1 class="nome">${x.relatore}</h1>
-  ${x.ruolo ? `<p class="ruolo">${x.ruolo}</p>` : ""}<p class="tema">${x.titolo}</p></div></div>` }));
+  ${x.ruolo ? `<p class="ruolo">${x.ruolo}</p>` : ""}${x.contributo ? `<p class="contrib">Con il contributo filmato di<b>${x.contributo}</b></p>` : ""}
+  <p class="tema">${x.titolo}</p></div></div>` }));
+const chi = x => x.relatore + (x.contributo ? " · contributo filmato di " + x.contributo : "");
 const resto = punti.map(p => p.minuti * 60000);      // millisecondi rimasti per punto
 let p = -1, g = 0, partito = null;                    // p = -1: copertina
 
 const voce = (x, i, qui) => `<button data-p="${i}" class="${qui ? "qui" : ""}"><span class="n">${i + 1}</span>
-  <span class="t">${x.titolo}<small>${x.relatore}</small></span><span class="m">${x.minuti} min</span></button>`;
+  <span class="t">${x.titolo}<small>${chi(x)}</small></span><span class="m">${x.minuti} min</span></button>`;
 const scaletta = qui => punti.map((x, i) => voce(x, i, i === qui)).join("");
 
 function copertina() {
@@ -261,7 +287,8 @@ function mostra() {
     s.innerHTML = pg.img
       ? `<img src="${pg.img}" alt="">${pg.nota ? `<p class="nota">${pg.nota}</p>` : ""}`
       : `<div class="pg">${pg.html}</div>`;
-    $("titolo").innerHTML = `${p + 1}. ${pt.titolo}<small>${pt.relatore}${pt.ruolo ? " · " + pt.ruolo : ""}</small>`;
+    $("titolo").innerHTML = `${p + 1}. ${pt.titolo}<small>${pt.relatore}${pt.ruolo ? " · " + pt.ruolo : ""}${pt.contributo ? " · video di " + pt.contributo : ""}</small>`;
+    filmato(s);
     $("pos").innerHTML = `Punto ${p + 1} di ${punti.length}<small>pagina ${g + 1} di ${pt.pagine.length}</small>`;
     $("timer").hidden = false;
     const im = s.querySelector("img");                            // un secondo tentativo se l'immagine non arriva
@@ -274,6 +301,24 @@ function mostra() {
   history.replaceState(null, "", p < 0 ? "#" : `#${p + 1}-${g + 1}`);
   disegna();
   suona();
+}
+
+// contributo filmato: play/pausa, riavvolgi, indietro 10 s, audio, barra cliccabile; parte solo a comando
+function filmato(s) {
+  const v = s.querySelector(".filmato video"); if (!v) return;
+  const b = n => s.querySelector(`[data-v="${n}"]`), mm = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+  const agg = () => {
+    b("play").textContent = v.paused ? "▶" : "❚❚";
+    b("audio").classList.toggle("muto", v.muted);
+    s.querySelector(".linea i").style.width = (v.currentTime / v.duration * 100 || 0) + "%";
+    s.querySelector(".ore").textContent = `${mm(v.currentTime)} / ${mm(v.duration || 0)}`;
+  };
+  ["play", "pause", "timeupdate", "loadedmetadata", "volumechange", "seeked"].forEach(e => v.addEventListener(e, agg));
+  v.onclick = b("play").onclick = () => v.paused ? v.play() : v.pause();
+  b("capo").onclick = () => { v.pause(); v.currentTime = 0; };
+  b("indietro").onclick = () => { v.currentTime = Math.max(0, v.currentTime - 10); };
+  b("audio").onclick = () => { v.muted = !v.muted; };
+  s.querySelector(".linea").onclick = e => { const r = e.currentTarget.getBoundingClientRect(); v.currentTime = (e.clientX - r.left) / r.width * v.duration; };
 }
 
 // musica: bossa nova sul benvenuto, jazz sull'ultima pagina (saluti), silenzio durante gli interventi
@@ -351,8 +396,9 @@ document.addEventListener("click", e => {
   if (b) vai(+b.dataset.p, 0);
 });
 document.addEventListener("keydown", e => {
-  const k = e.key;
-  if (["ArrowRight", "PageDown", " ", "Enter"].includes(k)) pagina(1);
+  const k = e.key, film = $("scena").querySelector(".filmato video");
+  if (film && k === " ") film.paused ? film.play() : film.pause();   // sulla pagina del filmato lo spazio fa play/pausa
+  else if (["ArrowRight", "PageDown", " ", "Enter"].includes(k)) pagina(1);
   else if (["ArrowLeft", "PageUp", "Backspace"].includes(k)) pagina(-1);
   else if (k === "ArrowDown") punto(1);
   else if (k === "ArrowUp") punto(-1);
