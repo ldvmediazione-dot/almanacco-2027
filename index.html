@@ -59,17 +59,17 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .contrib{font:600 22px 'Hanken Grotesk';letter-spacing:.16em;text-transform:uppercase;color:var(--oliva);margin-top:34px}
 .contrib b{display:block;font:500 58px/1.05 'Cormorant Garamond';letter-spacing:0;text-transform:none;color:var(--inchiostro);margin-top:8px}
 /* contributo filmato: schermo su fondo scuro col disegno dell'aula, video netto senza dissolvenze */
-.filmato{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:100px;padding:50px 170px;background:#1b120c;color:var(--carta);overflow:hidden;container-type:size}
+.filmato{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:90px;padding:20px 120px 20px 150px;background:#1b120c;color:var(--carta);overflow:hidden;container-type:size}
 .filmato::before{content:"";position:absolute;inset:0;background:url(img/ill/aula.jpg) center/cover;opacity:.16}
 .filmato>*{position:relative}
 .filmato .k{color:var(--chiaro)}
 .filmato h1{color:var(--carta);font-size:120px}
 .filmato h1 em{color:var(--chiaro)}
 .filmato .sub{color:var(--carta);opacity:.85;max-width:760px}
-.schermo video{display:block;height:calc(100cqh - 230px);max-height:1100px;aspect-ratio:478/850;background:#000;border:3px solid var(--chiaro);box-shadow:0 30px 80px rgba(0,0,0,.6);cursor:pointer}
-.linea{height:10px;margin-top:18px;background:rgba(242,232,213,.22);border-radius:5px;cursor:pointer;overflow:hidden}
+.schermo video{display:block;height:calc(100cqh - 40px);aspect-ratio:478/850;background:#000;border:3px solid var(--chiaro);box-shadow:0 30px 80px rgba(0,0,0,.6);cursor:pointer}
+.filmato .linea{max-width:640px;height:10px;margin-top:64px;background:rgba(242,232,213,.22);border-radius:5px;cursor:pointer;overflow:hidden}
 .linea i{display:block;height:100%;width:0;background:var(--chiaro)}
-.comandi{display:flex;align-items:center;gap:12px;margin-top:16px}
+.comandi{display:flex;align-items:center;gap:14px;margin-top:20px;max-width:640px}
 .comandi button{all:unset;cursor:pointer;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:rgba(242,232,213,.14);font-size:28px;line-height:1;color:var(--carta)}
 .comandi button:hover{background:var(--oliva)}
 .comandi svg{width:30px;height:30px}
@@ -79,7 +79,8 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .vert .filmato{grid-template-columns:1fr;gap:36px;padding:50px;align-content:center;justify-items:center;text-align:center}
 .vert .filmato h1{font-size:84px}
 .vert .filmato .sub{font-size:36px;margin-top:14px}
-.vert .schermo video{height:calc(100cqh - 560px)}
+.vert .schermo video{height:calc(100cqh - 470px)}
+.vert .filmato{gap:24px;padding:30px}.vert .filmato .linea{margin:24px auto 0}.vert .filmato .comandi{margin:14px auto 0}
 /* pagina illustrata: poche parole a sinistra, disegno a destra */
 .vis{display:grid;grid-template-columns:45% 55%}
 .vis .testo{padding:0 70px 0 130px;display:flex;flex-direction:column;justify-content:center}
