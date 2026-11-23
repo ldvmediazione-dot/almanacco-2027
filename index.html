@@ -97,6 +97,13 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .comandi .x,.comandi .muto .onde{display:none}
 .comandi .muto .x{display:inline}
 .ore{margin-left:auto;font:600 22px 'Hanken Grotesk';font-variant-numeric:tabular-nums;color:var(--carta)}
+/* video orizzontale (Tartaglione): titolo sopra, schermo largo sotto; sfondo col disegno dei cartelli */
+.filmato.oriz{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:30px;padding:60px 120px 40px 150px;align-items:start}
+.filmato.oriz::before{background-image:url(img/ill/cartelli.jpg)}
+.filmato.oriz h1{font-size:96px}
+.filmato.oriz .schermo{justify-self:center;align-self:stretch;min-height:0;display:flex}
+.oriz .schermo video{height:auto;max-height:100%;width:auto;max-width:100%;aspect-ratio:848/478;object-fit:contain;margin:auto}
+.vert .filmato.oriz .schermo video{width:calc(100cqw - 60px);height:auto}
 .vert .filmato{grid-template-columns:1fr;gap:36px;padding:50px;align-content:center;justify-items:center;text-align:center}
 .vert .filmato h1{font-size:84px}
 .vert .filmato .sub{font-size:36px;margin-top:14px}

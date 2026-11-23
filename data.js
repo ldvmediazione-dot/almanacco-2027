@@ -9,6 +9,19 @@ const vis = (img, k, h, dati = [], cls = "", extra = "") => ({
     <div class="foto"><img src="img/${img}" alt=""></div></div>`,
 });
 
+// contributo filmato: comandi gestiti in index.html (filmato), nessuna dissolvenza; cls "oriz" per i video orizzontali
+const film = (nome, sub, src, durata, cls = "") => ({
+  html: `<div class="filmato ${cls}"><div class="testo"><p class="k">Contributo filmato</p><h1>${nome}</h1>
+    <p class="sub">${sub}</p></div>
+    <div class="schermo"><video src="${src}" preload="auto" playsinline disablepictureinpicture disableremoteplayback></video>
+      <div class="sopra"><div class="linea"><i></i></div>
+      <div class="comandi"><button data-v="capo" title="Riavvolgi all'inizio">⏮</button>
+        <button data-v="indietro" title="Indietro di 10 secondi">↺</button>
+        <button data-v="play" title="Play / pausa (spazio)">▶</button>
+        <button data-v="audio" title="Audio sì / no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="onde" d="M16.5 8.5a5 5 0 0 1 0 7M19.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="M16 9l6 6M22 9l-6 6"/></svg></button>
+        <span class="ore">0:00 / ${durata}</span></div></div></div></div>`,
+});
+
 window.PITCH = {
   evento: {
     titolo: "Presentazione dell'Almanacco 2027",
@@ -126,11 +139,11 @@ window.PITCH = {
             <div class="poi"><i>+</i><b>E altri in arrivo</b><span>maestranze e botteghe artigiane si stanno unendo al tour</span></div></div>` }],
     },
     {
-      titolo: "Cartellonistica stradale", relatore: "Tommaso Tartaglione", minuti: 3, sfondo: "ill/vigna.jpg",
+      titolo: "Cartellonistica stradale", relatore: "Andrea Granito", ruolo: "Presidente",
+      contributo: "Tommaso Tartaglione", minuti: 3, sfondo: "ill/vigna.jpg",
       pagine: [vis("ill/cartelli.jpg", "Segni lungo le strade", "La Strada <em>si vede</em>",
-        [["8", "comuni"], ["Storia", "zonazione e mappe del territorio"]], "sx"),
-        { html: `<p class="k">Un esempio · Pro Loco Pontelatone</p><h1>Pontelatone <em>nella storia</em></h1>
-          <img class="largo" src="img/esempi/pannello-pontelatone.jpg" alt="">` }],
+        [["8", "comuni"], ["Storia", "zonazione e mappe del territorio"], ["Un esempio", "«Pontelatone nella storia», Pro Loco"]], "sx"),
+        film("Tommaso <em>Tartaglione</em>", "Cartellonistica stradale", "video/tartaglione.mp4", "2:00", "oriz")],
     },
     {
       titolo: "Educazione civica con i Maestri del Lavoro", relatore: "Andrea Granito", ruolo: "Presidente",
@@ -138,16 +151,7 @@ window.PITCH = {
       pagine: [vis("ill/aula.jpg", "Con i Maestri del Lavoro", "Educazione <em>civica</em>",
         [["Ambiente", "e storia locale"], ["Scuole", "e oratori"], ["Maestri", "del Lavoro, Confindustria Caserta"]], "",
         '<p class="fonte">Insigniti della Stella al Merito del Lavoro.</p>'),
-        // il contributo filmato: comandi gestiti in index.html (filmato), nessuna dissolvenza
-        { html: `<div class="filmato"><div class="testo"><p class="k">Contributo filmato</p><h1>Onorino <em>Gerarduzzi</em></h1>
-          <p class="sub">Educazione civica con i Maestri del Lavoro</p></div>
-          <div class="schermo"><video src="video/gerarduzzi.mp4" preload="auto" playsinline disablepictureinpicture disableremoteplayback></video>
-            <div class="sopra"><div class="linea"><i></i></div>
-            <div class="comandi"><button data-v="capo" title="Riavvolgi all'inizio">⏮</button>
-              <button data-v="indietro" title="Indietro di 10 secondi">↺</button>
-              <button data-v="play" title="Play / pausa (spazio)">▶</button>
-              <button data-v="audio" title="Audio sì / no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="onde" d="M16.5 8.5a5 5 0 0 1 0 7M19.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="M16 9l6 6M22 9l-6 6"/></svg></button>
-              <span class="ore">0:00 / 3:29</span></div></div></div></div>` }],
+        film("Onorino <em>Gerarduzzi</em>", "Educazione civica con i Maestri del Lavoro", "video/gerarduzzi.mp4", "3:29")],
     },
     {
       titolo: "Ricerca: analisi sensoriale e zonazione in tre anni", relatore: "Giovanni Piccirillo", minuti: 3, sfondo: "ill/cat-vigna.jpg",
