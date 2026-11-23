@@ -30,10 +30,21 @@ window.PITCH = {
     },
     {
       titolo: "Presentazione del progetto e comunicazione", relatore: "Studio Ryft", minuti: 2,
-      // apertura con la citazione al posto del disegno
-      destra: `<blockquote class="citazione">«Da soli possiamo fare così poco; insieme possiamo fare <em>così tanto</em>.»</blockquote>
+      // apertura: citazione piccola sotto il nome, a destra i numeri sui giovani e i canali digitali
+      // (Rapporto sul turismo enogastronomico italiano 2025, dati 2024)
+      sotto: `<div class="cit-pic"><blockquote class="citazione">«Da soli possiamo fare così poco; insieme possiamo fare <em>così tanto</em>.»</blockquote>
         <p class="autore">Helen Keller</p>
-        <p class="sub">È lo spirito della Strada: cantine, Comuni e territorio che comunicano con una voce sola.</p>`,
+        <p class="sub">È lo spirito della Strada: cantine, Comuni e territorio che comunicano con una voce sola.</p></div>`,
+      destra: `<p class="k">Perché la comunicazione, oggi</p><h2 class="kpi-t">I giovani scelgono <em>dal telefono</em></h2>
+        <div class="kpi">
+          <div><b>70%</b><span>degli italiani ha fatto un viaggio per cibo e vino. Nel 2016 era il 21%</span></div>
+          <div><b>7 su 10</b><span>tra i 18 e i 24 anni scoprono mete ed esperienze su Instagram</span></div>
+          <div><b>49%</b><span>dei giovanissimi sceglie su TikTok. Un anno prima era il 17%</span></div>
+          <div><b>1 su 3</b><span>sotto i 35 anni cerca dove andare su Google Maps</span></div>
+          <div><b>2ª</b><span>fonte più affidabile sono i siti web dedicati. La prima è il passaparola, oggi spesso digitale: recensioni e chat</span></div>
+        </div>
+        <p class="kpi-n">I giovani che ci scoprono oggi sono i clienti fedeli di domani.</p>
+        <p class="kpi-f">Fonte: Rapporto sul turismo enogastronomico italiano 2025, dati 2024</p>`,
       pagine: [
         vis("esempi/sito-home.jpg", "Il sito web", "La Strada <em>in rete</em>",
           [["Voci", "brevi video girati nei luoghi della DOC"], ["Percorsi", "tre modi di attraversarla"],

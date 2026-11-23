@@ -52,6 +52,21 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .apre:has(.destra) .testo{max-width:960px}
 .apre .destra .citazione{font-size:84px}
 .apre .destra .sub{font-size:38px}
+/* Studio Ryft: citazione piccola sotto il nome, numeri chiave a destra */
+.cit-pic{margin-top:40px}
+.cit-pic .citazione{font-size:46px;margin:0}
+.cit-pic .autore{font-size:18px;margin-top:18px}
+.cit-pic .autore::before{width:40px}
+.cit-pic .sub{font-size:26px;margin-top:12px}
+.apre:has(.cit-pic) .nome{font-size:160px}
+.apre:has(.cit-pic) .tema{margin-top:36px}
+.kpi-t{font:500 64px/1.05 'Cormorant Garamond';margin-bottom:30px}
+.kpi-t em{color:var(--vino)}
+.kpi>div{display:grid;grid-template-columns:190px 1fr;gap:26px;align-items:center;padding:16px 0;border-top:2px solid rgba(68,36,19,.15)}
+.kpi b{font:600 64px/1 'Cormorant Garamond';color:var(--vino)}
+.kpi span{font-size:25px;line-height:1.35}
+.kpi-n{font:italic 500 34px/1.2 'Cormorant Garamond';color:var(--oliva);border-top:4px solid var(--chiaro);padding-top:20px;margin-top:10px}
+.kpi-f{font-size:17px;color:var(--oliva);margin-top:12px;opacity:.8}
 .apre .testo{position:relative;height:100%;max-width:1150px;padding:0 140px;display:flex;flex-direction:column;justify-content:center}
 .nome{font:600 200px/.92 'Cormorant Garamond';color:var(--inchiostro)}
 .ruolo{font:italic 500 64px 'Cormorant Garamond';color:var(--vino);margin-top:26px}
@@ -206,6 +221,15 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .vert .apre .testo{max-width:none;padding:0 50px 90px;justify-content:flex-end}
 .vert .apre .destra{width:100%;height:50%;padding:60px 50px;border-left:0;border-bottom:4px solid var(--chiaro)}
 .vert .nome{font-size:130px}
+.vert .apre:has(.cit-pic) .nome{font-size:100px}
+.vert .apre .destra:has(.kpi){padding:36px 50px;height:56%}
+.vert .kpi-t{font-size:44px;margin-bottom:12px}
+.vert .kpi>div{grid-template-columns:130px 1fr;padding:8px 0}
+.vert .kpi b{font-size:42px}
+.vert .kpi span{font-size:20px}
+.vert .kpi-n{font-size:24px;padding-top:10px}
+.vert .cit-pic{margin-top:20px}
+.vert .cit-pic .citazione{font-size:32px}
 .vert .vis{grid-template-columns:1fr;grid-template-rows:auto 1fr}
 .vert .vis .testo{padding:80px 50px 40px}
 .vert .vis h1{font-size:76px}
@@ -264,7 +288,7 @@ const $ = id => document.getElementById(id);
 punti.forEach((x, i) => (x.sfondo || x.destra) && x.pagine.unshift({ html: `<div class="apre">${x.destra ? `<div class="destra">${x.destra}</div>` : `<img src="img/${x.sfondo}" alt="">`}
   <div class="testo"><h1 class="nome">${x.relatore}</h1>
   ${x.ruolo ? `<p class="ruolo">${x.ruolo}</p>` : ""}${x.contributo ? `<p class="contrib">Con il contributo filmato di<b>${x.contributo}</b></p>` : ""}
-  <p class="tema">${x.titolo}</p></div></div>` }));
+  <p class="tema">${x.titolo}</p>${x.sotto || ""}</div></div>` }));
 const chi = x => x.relatore + (x.contributo ? " · contributo filmato di " + x.contributo : "");
 const resto = punti.map(p => p.minuti * 60000);      // millisecondi rimasti per punto
 let p = -1, g = 0, partito = null;                    // p = -1: copertina
