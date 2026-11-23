@@ -141,9 +141,12 @@ window.PITCH = {
     {
       titolo: "Cartellonistica stradale", relatore: "Andrea Granito", ruolo: "Presidente",
       contributo: "Tommaso Tartaglione", minuti: 3, sfondo: "ill/vigna.jpg",
-      pagine: [vis("ill/cartelli.jpg", "Segni lungo le strade", "La Strada <em>si vede</em>",
-        [["8", "comuni"], ["Storia", "zonazione e mappe del territorio"], ["Un esempio", "«Pontelatone nella storia», Pro Loco"]], "sx"),
-        film("Tommaso <em>Tartaglione</em>", "Cartellonistica stradale", "video/tartaglione.mp4", "2:00", "oriz")],
+      pagine: [{ html: `<p class="k">Cartelli stradali e pannelli storici</p><h1>La Strada <em>si vede</em></h1>
+          <div class="due cart">
+            <figure><img src="img/ill/cartelli.jpg" alt=""><figcaption><b>Lungo le strade</b>Gli 8 comuni della Strada</figcaption></figure>
+            <figure><img src="img/esempi/pannello-pontelatone.jpg" alt=""><figcaption><b>Nei luoghi della storia</b>«Pontelatone nella storia», Pro Loco</figcaption></figure>
+          </div>` },
+        film("Tommaso <em>Tartaglione</em>", "Cartelli stradali e pannelli storici", "video/tartaglione.mp4", "2:00", "oriz")],
     },
     {
       titolo: "Educazione civica con i Maestri del Lavoro", relatore: "Andrea Granito", ruolo: "Presidente",
