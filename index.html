@@ -97,18 +97,17 @@ h3{font:600 46px 'Cormorant Garamond';color:var(--vino);margin-bottom:16px}
 .comandi .x,.comandi .muto .onde{display:none}
 .comandi .muto .x{display:inline}
 .ore{margin-left:auto;font:600 22px 'Hanken Grotesk';font-variant-numeric:tabular-nums;color:var(--carta)}
-/* video orizzontale (Tartaglione): a tutto schermo, titolo piccolo in alto che sparisce durante la riproduzione */
-.filmato.oriz{display:block;padding:0;background:#000}
-.filmato.oriz::before{display:none}
-.oriz .schermo{position:absolute;inset:0}
-.oriz .schermo video{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:50% 15%;border:0;box-shadow:none}
-.oriz .testo{position:absolute;top:0;left:0;right:0;z-index:1;padding:50px 80px 90px;background:linear-gradient(rgba(0,0,0,.7),transparent);pointer-events:none;transition:opacity .4s}
-.filmato.oriz:has(.va) .testo{opacity:0}
-.filmato.oriz h1{font-size:72px}
-.filmato.oriz .sub{font-size:30px;margin-top:6px}
-.oriz .sopra{left:80px;right:80px;bottom:40px}
-.vert .filmato.oriz .schermo video{width:100%;height:100%;object-fit:contain}
-.vert .oriz .testo{text-align:left;padding:40px}
+/* video orizzontale (Tartaglione): 70% della pagina (la sorgente e' 848x478, oltre si sgrana), titolo sopra, disegno dei cartelli sullo sfondo */
+.filmato.oriz{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:0}
+.filmato.oriz::before{background-image:url(img/ill/cartelli.jpg)}
+.oriz .testo,.oriz .schermo{width:70%}
+.oriz .testo{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:28px}
+.oriz .testo .k{width:100%;margin:0 0 4px}
+.filmato.oriz h1{font-size:60px}
+.filmato.oriz .sub{font-size:30px;margin:0}
+.oriz .schermo video{width:100%;height:auto;aspect-ratio:848/478;object-fit:contain}
+.vert .oriz .testo,.vert .oriz .schermo{width:calc(100% - 60px)}
+.vert .filmato.oriz .schermo video{width:100%;height:auto}
 .vert .filmato{grid-template-columns:1fr;gap:36px;padding:50px;align-content:center;justify-items:center;text-align:center}
 .vert .filmato h1{font-size:84px}
 .vert .filmato .sub{font-size:36px;margin-top:14px}
